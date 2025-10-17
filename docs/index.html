@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootcamp Helper — Extensão MV3</title>
+    <style>
+      :root{--bg:#0e1116;--panel:#141923;--text:#e6e8ec;--muted:#9aa4b2;--accent:#0b5fff;--radius:12px}
+      *{box-sizing:border-box}
+      body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}
+      .container{max-width:880px;margin:0 auto;padding:32px}
+      .card{background:var(--panel);border-radius:var(--radius);padding:24px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+      h1{margin:0 0 8px}
+      h2{margin:24px 0 8px}
+      code{background:#101520;padding:2px 6px;border-radius:6px}
+      .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px}
+      ul{line-height:1.8}
+      .muted{color:var(--muted)}
+      pre{background:#0b0f16;padding:12px;border-radius:8px;overflow:auto}
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <h1>Bootcamp Helper</h1>
+        <p class="muted">Extensão para Chrome (Manifest V3) — projeto do Bootcamp II.</p>
+
+        <h2>Instalação manual (modo desenvolvedor)</h2>
+        <ol>
+          <li>Abra <code>chrome://extensions</code> e ative <strong>Developer mode</strong>.</li>
+          <li>Clique em <strong>Load unpacked</strong> e selecione a pasta do projeto.</li>
+          <li>Abra o popup pelo ícone da extensão e verifique o console.</li>
+        </ol>
+
+        <h2>Permissões</h2>
+        <ul>
+          <li><code>storage</code></li>
+        </ul>
+
+        <h2>Download</h2>
+        <p>
+          Depois de publicar uma Release, o .zip ficará disponível aqui.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
