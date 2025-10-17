@@ -1,4 +1,4 @@
-# Bootcamp Helper — Extensão Chrome (Manifest V3)
+Extensão Chrome (Manifest V3)
 
 Extensão simples para o Bootcamp II: popup que envia PING ao background e exibe o horário retornado; content script que destaca links no domínio permitido.
 
