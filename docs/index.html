@@ -5,43 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bootcamp Helper — Extensão MV3</title>
     <style>
-      :root{--bg:#0e1116;--panel:#141923;--text:#e6e8ec;--muted:#9aa4b2;--accent:#0b5fff;--radius:12px}
-      *{box-sizing:border-box}
-      body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}
-      .container{max-width:880px;margin:0 auto;padding:32px}
-      .card{background:var(--panel);border-radius:var(--radius);padding:24px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
-      h1{margin:0 0 8px}
-      h2{margin:24px 0 8px}
-      code{background:#101520;padding:2px 6px;border-radius:6px}
-      .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px}
-      ul{line-height:1.8}
-      .muted{color:var(--muted)}
-      pre{background:#0b0f16;padding:12px;border-radius:8px;overflow:auto}
+      :root { --bg: #0b1020; --fg: #e6eefc; --muted: #96a0b5; --accent: #ec0089; }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; padding: 0; }
+      body { font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial; color: var(--fg); background: linear-gradient(180deg, #0b1020, #141a33 30%, #0b1020); }
+      header { padding: 24px 16px; text-align: center; }
+      h1 { margin: 0; font-size: 28px; }
+      main { max-width: 880px; margin: 0 auto; padding: 0 16px 40px; }
+      section { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+      .badge { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(236,0,137,.15); color: #ffd2ec; font-weight: 600; }
+      a.btn { display: inline-block; padding: 10px 14px; border-radius: 8px; text-decoration: none; background: var(--accent); color: white; font-weight: 700; }
+      code, pre { background: rgba(255,255,255,.06); padding: 2px 6px; border-radius: 6px; }
+      footer { text-align: center; padding: 20px; color: var(--muted); font-size: 14px; }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="card">
-        <h1>Bootcamp Helper</h1>
-        <p class="muted">Extensão para Chrome (Manifest V3) — projeto do Bootcamp II.</p>
-
+    <header>
+      <div class="badge">Manifest V3</div>
+      <h1>Bootcamp Helper — Extensão MV3</h1>
+      <p>Extensão para Chrome (Manifest V3) — projeto do Bootcamp II.</p>
+    </header>
+    <main>
+      <section>
         <h2>Instalação manual (modo desenvolvedor)</h2>
         <ol>
-          <li>Abra <code>chrome://extensions</code> e ative <strong>Developer mode</strong>.</li>
+          <li>Acesse <code>chrome://extensions</code> e ative <strong>Developer mode</strong>.</li>
           <li>Clique em <strong>Load unpacked</strong> e selecione a pasta do projeto.</li>
-          <li>Abra o popup pelo ícone da extensão e verifique o console.</li>
+          <li>Abra o popup pelo ícone da extensão e verifique o console (F12).</li>
         </ol>
+      </section>
 
-        <h2>Permissões</h2>
-        <ul>
-          <li><code>storage</code></li>
-        </ul>
+      <section class="grid">
+        <div>
+          <h3>Download</h3>
+          <p>
+            <a class="btn" href="../release/latest.zip">Baixar .zip</a>
+          </p>
+          <p>Caso não exista, crie uma Release no GitHub com o zip.</p>
+        </div>
+        <div>
+          <h3>Permissões</h3>
+          <ul>
+            <li><code>storage</code></li>
+            <li>Content script apenas em <code>developer.chrome.com</code></li>
+          </ul>
+        </div>
+      </section>
 
-        <h2>Download</h2>
-        <p>
-          Depois de publicar uma Release, o .zip ficará disponível aqui.
-        </p>
-      </div>
-    </div>
+      <section>
+        <h2>Como funciona</h2>
+        <p>O popup envia um <code>PING</code> para o service worker, que responde com o horário. Um content script simples destaca links em páginas do domínio permitido.</p>
+      </section>
+    </main>
+    <footer>
+      <p>
+        Veja o código no GitHub e a documentação do MV3.
+      </p>
+    </footer>
   </body>
 </html>
