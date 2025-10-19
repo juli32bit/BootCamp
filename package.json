@@ -1,0 +1,34 @@
+{
+  "name": "bootcamp-helper-extension",
+  "version": "1.0.0",
+  "description": "Chrome Extension MV3 for Bootcamp II with E2E testing",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-extension.mjs",
+    "test:e2e": "playwright test --reporter=list,html",
+    "test": "npm run build && npm run test:e2e",
+    "ci": "npm ci && npm run test",
+    "dev": "npm run build && npm run test:e2e -- --headed",
+    "report": "npx playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "archiver": "^7.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/bootcamp-helper-extension.git"
+  },
+  "keywords": [
+    "chrome-extension",
+    "mv3",
+    "playwright",
+    "e2e-testing",
+    "docker"
+  ],
+  "author": "Bootcamp II",
+  "license": "MIT"
+}

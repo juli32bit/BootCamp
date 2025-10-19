@@ -1,19 +1,27 @@
-Extensão Chrome (Manifest V3)
+# 🐳 Extensão Chrome (Manifest V3) — Bootcamp Helper com Testes E2E e CI/CD
 
-Extensão simples para o Bootcamp II: popup que envia PING ao background e exibe o horário retornado; content script que destaca links no domínio permitido.
+Extensão Chrome (MV3) com popup que envia PING ao background e exibe o horário retornado; content script que destaca links no domínio permitido.
+Inclui testes E2E com **Playwright**, execução containerizada via **Docker/Compose** e pipeline automatizado no **GitHub Actions** que gera artefatos de distribuição.
 
-## Requisitos atendidos
-- Manifest V3 (Chrome 114+)
-- Popup (`action.default_popup`) com UI simples
-- Service worker em `background.service-worker`
-- Content script opcional (ativado para `developer.chrome.com`)
-- Princípio do menor privilégio: `storage` e host restrito
-- Ícones 16/32/48/128 em `icons/`
-- CSP padrão (scripts locais, sem eval)
+---
 
-## Estrutura
+## ✅ Recursos
+
+* **Manifest V3 (Chrome 114+)**
+* **Popup (`action.default_popup`)** com UI simples
+* **Background** com *service worker* em `background.service-worker`
+* **Content script** (ativado para `https://developer.chrome.com/*`)
+* **Princípio do menor privilégio**: usa `storage` e host restrito
+* **Teste E2E com Playwright** (relatórios HTML/JSON, screenshots e vídeos em falhas)
+* **Execução em Docker** (Playwright container)
+* **CI/CD (GitHub Actions)**: build, testes (nativo e Docker) e artefatos (ZIP da extensão, relatório Playwright, resultados JSON, `dist/`)
+
+---
+
+## 📁 Estrutura do Projeto
+
 ```
-my-chrome-extension/
+.
 ├─ src/
 │  ├─ popup/
 │  │  ├─ popup.html
@@ -32,27 +40,191 @@ my-chrome-extension/
 │  ├─ icon32.png
 │  ├─ icon48.png
 │  └─ icon128.png
-├─ docs/
+├─ docs/                 # Página simples p/ GitHub Pages (opcional)
 │  └─ index.html
+├─ tests/                # Playwright
+│  ├─ extension.spec.ts
+│  └─ playwright.config.ts
+├─ scripts/
+│  └─ build-extension.mjs
+├─ .github/workflows/
+│  └─ ci.yml
+├─ dist/                 # Gerado no build
+├─ Dockerfile
+├─ docker-compose.yml
+├─ package.json
 ├─ manifest.json
 ├─ README.md
 └─ LICENSE
 ```
 
-## Instalação (local)
-1. Acesse `chrome://extensions` e ative Developer mode
-2. Clique em Load unpacked e selecione a pasta do projeto
-3. Abra o popup pelo ícone da extensão
+---
 
-## Desenvolvimento
-- Edite o popup em `src/popup/`
-- Altere o service worker em `src/background/service-worker.js`
-- Ajuste o content script e `matches` no `manifest.json`
+## 🚀 Pré-requisitos
 
-## Publicação (GitHub Pages)
-- Habilite Pages em Settings → Pages: branch `main`, pasta `/docs`
-- A página inicial está em `docs/index.html`
-- Opcional: adicionar link para Release com `.zip`
+* **Node.js 18+**
+* **(Opcional)** Docker e Docker Compose
+* **Chrome/Chromium** (para desenvolvimento local)
 
-## Licença
-MIT — veja `LICENSE`.
+---
+
+## 🧩 Instalação e Desenvolvimento
+
+```bash
+# Instalar dependências
+npm install
+
+# Instalar navegadores do Playwright (se necessário)
+npx playwright install chromium
+
+# Build da extensão
+npm run build
+
+# Carregar no Chrome:
+# 1) Acesse chrome://extensions
+# 2) Ative "Developer mode"
+# 3) Clique em "Load unpacked" e selecione a pasta dist/
+```
+
+---
+
+## 🧪 Testes (Playwright)
+
+```bash
+# Rodar todos os testes
+npm test
+
+# Apenas E2E
+npm run test:e2e
+
+# UI mode
+npx playwright test --ui
+
+# Ver relatório
+npm run report
+# ou
+npx playwright show-report
+```
+
+---
+
+## 🐳 Testes em Docker
+
+```bash
+# Build da imagem
+docker compose build
+
+# Executar testes no container
+docker compose run --rm e2e
+
+# Ver relatórios (montados via volume)
+npx playwright show-report
+```
+
+---
+
+## ⚙️ CI/CD (GitHub Actions)
+
+Pipeline em `.github/workflows/ci.yml`:
+
+### 🔄 Recursos
+
+* Testes nativos e em Docker
+* Artefatos gerados automaticamente:
+
+  1. **extension-zip** – pacote pronto para instalação no Chrome
+  2. **playwright-report** – relatório HTML com logs e screenshots
+  3. **test-results** – resultados em JSON
+  4. **extension-dist** – build completo da extensão
+* Cache de dependências NPM para builds mais rápidos
+
+---
+
+## 📦 Scripts úteis (npm)
+
+```json
+{
+  "build": "Build para a pasta dist/",
+  "test:e2e": "Testes E2E com Playwright",
+  "test": "Build + testes",
+  "ci": "Pipeline local (instalação + testes)",
+  "dev": "Testes com navegador visível",
+  "report": "Abre o relatório do Playwright"
+}
+```
+
+---
+
+## 🌐 GitHub Pages (opcional)
+
+* Ative em **Settings → Pages**: branch `main`, pasta `/docs`
+* A *landing page* simples fica em `docs/index.html`
+* Opcional: vincular uma *Release* com o `.zip` gerado pela Action
+
+---
+
+## 🔐 Permissões e Configurações
+
+* **Manifest Version**: 3
+* **Permissions**: `storage`
+* **Content Scripts**: `matches: ["https://developer.chrome.com/*"]`
+* **Background**: *service worker*
+* **CSP padrão** (scripts locais, sem `eval`)
+
+---
+
+## 🧰 Dicas de Debug
+
+```bash
+# Rodar com navegador visível
+npm run dev
+
+# Filtrar por teste específico
+npx playwright test --grep "popup" --headed --debug
+
+# Gerar trace de todos os testes
+npx playwright test --trace on
+```
+
+---
+
+## 📄 Licença
+
+MIT — veja o arquivo `LICENSE`.
+
+---
+
+## 💡 Créditos
+
+Construído com ❤️ para o **Bootcamp II** — integrando desenvolvimento de extensões Chrome com testes automatizados, containerização e entrega contínua.
+
+---
+
+## 🧭 Contribuindo
+
+1. Faça um fork do repositório
+2. Crie uma *feature branch*:
+
+   ```bash
+   git checkout -b minha-feature
+   ```
+3. Faça suas alterações
+4. Rode os testes:
+
+   ```bash
+   npm test
+   ```
+5. Envie um *pull request* 🚀
+
+---
+
+## 🆘 Suporte
+
+Para dúvidas e problemas:
+
+1. Verifique os [Issues no GitHub](../../issues)
+2. Consulte a documentação do [Playwright](https://playwright.dev/)
+3. Veja o guia oficial de [Extensões Chrome MV3](https://developer.chrome.com/docs/extensions/)
+
+---
+```

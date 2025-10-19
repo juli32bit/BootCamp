@@ -1,0 +1,17 @@
+services:
+  e2e:
+    build: .
+    image: bootcamp/ext-e2e:latest
+    environment:
+      - CI=true
+      - PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./test-results:/app/test-results
+    working_dir: /app
+    command: npm run test:e2e
+    # Increase shared memory to prevent Chromium crashes
+    shm_size: 2gb
+    # Optional: for debugging, uncomment to keep container running
+    # tty: true
+    # stdin_open: true
